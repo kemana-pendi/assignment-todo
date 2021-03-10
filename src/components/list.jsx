@@ -4,17 +4,17 @@ class List extends Component {
   render() {
     const { onEdit, onDelete, list } = this.props;
     return (
-      <div>
-        <span className={this.getBadgeClasses()}>{this.formatList()}</span>
+      <div className="form-group form-group-sm row">
+        {this.elementRender()}
         <button
-          onClick={() => onEdit(list)}
-          className="btn btn-secondary btn-sm"
+          onClick={() => onEdit(list.id)}
+          className={this.getEditClasses()}
         >
-          Edit
+          {this.buttonRender()}
         </button>
         <button
           onClick={() => onDelete(list.id)}
-          className="btn btn-danger btn-sm m-2"
+          className={this.getDeleteClasses()}
         >
           Delete
         </button>
@@ -22,14 +22,52 @@ class List extends Component {
     );
   }
 
-  getBadgeClasses() {
-    let classes = "badge m-2 badge-";
-    classes += this.props.list.value === 0 ? "warning" : "primary";
+  getEditClasses() {
+    let classes = "btn mr-2 btn-";
+    classes +=
+      this.props.list.editing !== "" ? "success btn-md" : "secondary btn-sm";
+    return classes;
+  }
+
+  getDeleteClasses() {
+    let classes = "btn btn-danger btn-sm mr-2 ";
+    classes += this.props.list.editing !== "" ? "d-none" : "";
     return classes;
   }
 
   formatList() {
     return this.props.list.value;
+  }
+
+  elementRender() {
+    let element = (
+      <span className="mr-2 justify-content-center align-self-center">
+        {this.formatList()}
+      </span>
+    );
+    if (this.props.list.editing !== "") {
+      element = (
+        <div class="col-xs-2 mr-2">
+          <input
+            type="text"
+            name="listEdit"
+            value={this.props.list.value}
+            onChange={(e) =>
+              this.props.onChange(e.target.value, this.props.list.id)
+            }
+            className="form-control input-sm"
+          />
+        </div>
+      );
+    }
+    return element;
+  }
+  buttonRender() {
+    let buttonText = "Edit";
+    if (this.props.list.editing !== "") {
+      buttonText = "Submit";
+    }
+    return buttonText;
   }
 }
 

@@ -3,7 +3,7 @@ import List from "./list";
 
 class Todo extends Component {
   render() {
-    const { toDo, onDelete, onEdit } = this.props;
+    const { toDo, onDelete, onEdit, onChange } = this.props;
     return (
       <React.Fragment>
         <div className={this.getHideRow()}>
@@ -15,14 +15,17 @@ class Todo extends Component {
         </div>
         <div className="row">
           <div className="col mt-4">
-            {toDo.map((list) => (
-              <List
-                key={list.id}
-                onEdit={onEdit}
-                onDelete={onDelete}
-                list={list}
-              />
-            ))}
+            <div className="container">
+              {toDo.map((list) => (
+                <List
+                  key={list.id}
+                  onEdit={onEdit}
+                  onDelete={onDelete}
+                  onChange={onChange}
+                  list={list}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </React.Fragment>
