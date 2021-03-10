@@ -40,13 +40,8 @@ class List extends Component {
   }
 
   elementRender() {
-    let element = (
-      <span className="mr-2 justify-content-center align-self-center">
-        {this.formatList()}
-      </span>
-    );
     if (this.props.list.editing !== "") {
-      element = (
+      return (
         <div class="col-xs-2 mr-2">
           <input
             type="text"
@@ -59,15 +54,20 @@ class List extends Component {
           />
         </div>
       );
+    } else {
+      return (
+        <span className="mr-2 justify-content-center align-self-center">
+          {this.formatList()}
+        </span>
+      );
     }
-    return element;
   }
   buttonRender() {
-    let buttonText = "Edit";
     if (this.props.list.editing !== "") {
-      buttonText = "Submit";
+      return "Submit";
+    } else {
+      return "Edit";
     }
-    return buttonText;
   }
 }
 

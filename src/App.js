@@ -26,7 +26,7 @@ class App extends Component {
 
   handleEditChange = (value, id) => {
     const toDo = [...this.state.toDo];
-    let index = toDo.findIndex((item) => item.id === id);
+    const index = toDo.findIndex((item) => item.id === id);
     toDo[index].value = value;
     this.setState({ toDo });
   };
@@ -66,7 +66,7 @@ class App extends Component {
 
   handleEdit = (toDoId) => {
     const toDo = [...this.state.toDo];
-    let index = toDo.findIndex((item) => item.id === toDoId);
+    const index = toDo.findIndex((item) => item.id === toDoId);
     if (toDo[index].editing === "active") {
       toDo[index].editing = "";
     } else {
