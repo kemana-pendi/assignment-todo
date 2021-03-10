@@ -35,39 +35,27 @@ class List extends Component {
     return classes;
   }
 
-  formatList() {
-    return this.props.list.value;
-  }
-
   elementRender() {
-    if (this.props.list.editing !== "") {
-      return (
-        <div class="col-xs-2 mr-2">
-          <input
-            type="text"
-            name="listEdit"
-            value={this.props.list.value}
-            onChange={(e) =>
-              this.props.onChange(e.target.value, this.props.list.id)
-            }
-            className="form-control input-sm"
-          />
-        </div>
-      );
-    } else {
-      return (
-        <span className="mr-2 justify-content-center align-self-center">
-          {this.formatList()}
-        </span>
-      );
-    }
+    return this.props.list.editing !== "" ? (
+      <div class="col-xs-2 mr-2">
+        <input
+          type="text"
+          name="listEdit"
+          value={this.props.list.value}
+          onChange={(e) =>
+            this.props.onChange(e.target.value, this.props.list.id)
+          }
+          className="form-control input-sm"
+        />
+      </div>
+    ) : (
+      <span className="mr-2 justify-content-center align-self-center">
+        {this.props.list.value}
+      </span>
+    );
   }
   buttonRender() {
-    if (this.props.list.editing !== "") {
-      return "Submit";
-    } else {
-      return "Edit";
-    }
+    return this.props.list.editing !== "" ? "Submit" : "Edit";
   }
 }
 

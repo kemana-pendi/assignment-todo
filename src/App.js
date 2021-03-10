@@ -11,12 +11,13 @@ class App extends Component {
   };
 
   componentDidMount() {
-    this.setState({ listInput: localStorage.getItem("listInput") });
-    if (localStorage.getItem("toDo")) {
-      this.setState({ toDo: JSON.parse(localStorage.getItem("toDo")) });
+    {
+      localStorage.getItem("toDo") &&
+        this.setState({ toDo: JSON.parse(localStorage.getItem("toDo")) });
     }
-    if (localStorage.getItem("error")) {
-      this.setState({ error: localStorage.getItem("error") });
+    {
+      localStorage.getItem("error") &&
+        this.setState({ error: localStorage.getItem("error") });
     }
   }
 
@@ -67,11 +68,9 @@ class App extends Component {
   handleEdit = (toDoId) => {
     const toDo = [...this.state.toDo];
     const index = toDo.findIndex((item) => item.id === toDoId);
-    if (toDo[index].editing === "active") {
-      toDo[index].editing = "";
-    } else {
-      toDo[index].editing = "active";
-    }
+    toDo[index].editing === "active"
+      ? (toDo[index].editing = "")
+      : (toDo[index].editing = "active");
     this.setState({ toDo });
   };
 
