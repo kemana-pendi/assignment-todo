@@ -33,11 +33,11 @@ class Todo extends Component {
   }
 
   getEmptyNotice() {
-    return this.props.toDo.length === 0 ? "Please submit a new list" : "";
+    return this.props.toDo.length === 0 && "Please submit a new list";
   }
 
   getAlertClasses() {
-    return this.props.toDo.length === 0 ? "alert alert-danger" : "";
+    return this.props.toDo.length === 0 && "alert alert-danger";
   }
 
   getHideRow() {
